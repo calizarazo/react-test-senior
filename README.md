@@ -198,7 +198,7 @@ Revisa los mensajes de error y corrige los problemas de tipado.
 
 ## 👨‍💻 Desarrollador
 
-Desarrollado por Habi - 2024
+Desarrollado por camilazo - 2026
 
 ## 📄 Licencia
 

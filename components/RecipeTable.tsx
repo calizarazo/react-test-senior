@@ -18,6 +18,26 @@ import {
 import { useRouter } from 'next/navigation';
 import { useRecipeStore } from '@/store/recipeStore';
 
+/**
+ * Componente que muestra una tabla paginada con todas las recetas disponibles.
+ * Permite navegar a los detalles de una receta haciendo clic en una fila.
+ *
+ * @returns El componente de tabla de recetas con paginación
+ *
+ * @remarks
+ * El componente maneja automáticamente:
+ * - La carga de recetas al montarse
+ * - Estados de carga y error
+ * - Paginación de resultados
+ * - Navegación a detalles de receta
+ *
+ * @example
+ * ```tsx
+ * <RecipeTable />
+ * ```
+ *
+ * @public
+ */
 const RecipeTable: React.FC = () => {
   const router = useRouter();
   const {
@@ -35,10 +55,21 @@ const RecipeTable: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  /**
+   * Maneja el cambio de página en la tabla.
+   *
+   * @param _event - Evento del cambio de página (no utilizado)
+   * @param newPage - Nueva página seleccionada (basada en 0)
+   */
   const handleChangePage = (_event: unknown, newPage: number) => {
     setCurrentPage(newPage + 1); // Convert from 0-based to 1-based
   };
 
+  /**
+   * Maneja el clic en una fila de la tabla para navegar a los detalles de la receta.
+   *
+   * @param recipeId - Identificador de la receta a visualizar
+   */
   const handleRowClick = (recipeId: number) => {
     router.push(`/recipe/${recipeId}`);
   };

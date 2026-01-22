@@ -3,6 +3,23 @@
 import React from 'react';
 import { Box, Typography, Container } from '@mui/material';
 
+/**
+ * Componente de pie de página de la aplicación.
+ * Muestra información del desarrollador y el año actual.
+ *
+ * @returns El componente de pie de página
+ *
+ * @remarks
+ * El footer se adapta automáticamente al tema (claro/oscuro) y
+ * muestra el año actual dinámicamente.
+ *
+ * @example
+ * ```tsx
+ * <Footer />
+ * ```
+ *
+ * @public
+ */
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
@@ -21,7 +38,7 @@ const Footer: React.FC = () => {
     >
       <Container maxWidth="lg">
         <Typography variant="body2" color="text.secondary" align="center">
-          Desarrollado por Habi - {currentYear}
+          Desarrollado por camilazo - {currentYear}
         </Typography>
       </Container>
     </Box>

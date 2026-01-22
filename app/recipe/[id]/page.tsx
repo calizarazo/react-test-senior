@@ -22,6 +22,27 @@ import { useRecipeStore } from '@/store/recipeStore';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
+/**
+ * Página de detalle de una receta específica.
+ * Muestra información completa de la receta incluyendo ingredientes,
+ * instrucciones, valoración y etiquetas.
+ *
+ * @returns El componente de la página de detalle de receta
+ *
+ * @remarks
+ * La página:
+ * - Obtiene el ID de la receta desde los parámetros de la URL
+ * - Carga automáticamente los datos de la receta al montarse
+ * - Muestra estados de carga y error apropiados
+ * - Permite volver a la lista de recetas
+ *
+ * @example
+ * ```tsx
+ * // Se renderiza automáticamente en rutas como "/recipe/1", "/recipe/2", etc.
+ * ```
+ *
+ * @public
+ */
 export default function RecipeDetailPage() {
   const params = useParams();
   const router = useRouter();
@@ -34,6 +55,9 @@ export default function RecipeDetailPage() {
     }
   }, [recipeId, fetchRecipeById]);
 
+  /**
+   * Maneja la navegación de vuelta a la página principal.
+   */
   const handleBack = () => {
     router.push('/');
   };

@@ -13,12 +13,46 @@ import {
 } from '@mui/material';
 import { useRecipeStore } from '@/store/recipeStore';
 
+/**
+ * Propiedades del componente Sidebar.
+ *
+ * @public
+ */
 interface SidebarProps {
+  /** Indica si el sidebar está abierto (para móviles) */
   open: boolean;
+  /** Función callback que se ejecuta cuando se cierra el sidebar */
   onClose: () => void;
+  /** Ancho del drawer en píxeles */
   drawerWidth: number;
 }
 
+/**
+ * Componente de barra lateral que permite filtrar recetas por dificultad.
+ * Se muestra como un drawer permanente en desktop y temporal en móviles.
+ *
+ * @param props - Propiedades del componente
+ * @param props.open - Estado de apertura del drawer (móviles)
+ * @param props.onClose - Callback para cerrar el drawer
+ * @param props.drawerWidth - Ancho del drawer
+ * @returns El componente de barra lateral con filtros
+ *
+ * @remarks
+ * El componente se adapta automáticamente:
+ * - En móviles: drawer temporal que se abre/cierra
+ * - En desktop: drawer permanente siempre visible
+ *
+ * @example
+ * ```tsx
+ * <Sidebar
+ *   open={mobileOpen}
+ *   onClose={handleDrawerToggle}
+ *   drawerWidth={240}
+ * />
+ * ```
+ *
+ * @public
+ */
 const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
   const { difficultyFilter, setDifficultyFilter } = useRecipeStore();
 
@@ -29,6 +63,11 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
     'Hard',
   ];
 
+  /**
+   * Maneja el cambio de filtro de dificultad.
+   *
+   * @param difficulty - Nivel de dificultad seleccionado
+   */
   const handleFilterChange = (difficulty: 'All' | 'Easy' | 'Medium' | 'Hard') => {
     setDifficultyFilter(difficulty);
   };

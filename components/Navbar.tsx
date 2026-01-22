@@ -15,6 +15,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import LoginIcon from '@mui/icons-material/Login';
 import { styled, alpha } from '@mui/material/styles';
 
+/**
+ * Componente estilizado para el contenedor de búsqueda en la barra de navegación.
+ *
+ * @internal
+ */
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -30,6 +35,11 @@ const Search = styled('div')(({ theme }) => ({
   },
 }));
 
+/**
+ * Componente estilizado para el wrapper del ícono de búsqueda.
+ *
+ * @internal
+ */
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
@@ -40,6 +50,11 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   justifyContent: 'center',
 }));
 
+/**
+ * Componente estilizado para el input de búsqueda.
+ *
+ * @internal
+ */
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   width: '100%',
@@ -56,6 +71,24 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+/**
+ * Componente de barra de navegación principal de la aplicación.
+ * Incluye el logo, título, barra de búsqueda y botón de inicio de sesión.
+ *
+ * @returns El componente de barra de navegación
+ *
+ * @remarks
+ * La barra de navegación es estática y siempre visible en la parte superior
+ * de la aplicación. El campo de búsqueda está presente pero no implementa
+ * funcionalidad de búsqueda aún.
+ *
+ * @example
+ * ```tsx
+ * <Navbar />
+ * ```
+ *
+ * @public
+ */
 const Navbar: React.FC = () => {
   return (
     <AppBar position="static" sx={{ mb: 2 }}>

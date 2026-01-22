@@ -1,8 +1,20 @@
 import axios, { AxiosError } from 'axios';
 import { Recipe, RecipesResponse } from '@/types/recipe';
 
+/**
+ * URL base de la API de DummyJSON para recetas.
+ *
+ * @internal
+ */
 const API_BASE_URL = 'https://dummyjson.com';
 
+/**
+ * Cliente HTTP configurado para realizar peticiones a la API de recetas.
+ * Utiliza un interceptor para parsear manualmente las respuestas JSON
+ * y manejar errores de forma consistente.
+ *
+ * @internal
+ */
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
@@ -12,7 +24,16 @@ const apiClient = axios.create({
   },
 });
 
-// Request interceptor for logging (optional)
+/**
+ * Interceptor de peticiones HTTP.
+ * Actualmente pasa la configuración sin modificaciones.
+ *
+ * @param config - Configuración de la petición Axios
+ * @returns La configuración de la petición sin modificaciones
+ * @throws Rechaza la promesa si hay un error en la configuración
+ *
+ * @internal
+ */
 apiClient.interceptors.request.use(
   (config) => {
     return config;
@@ -22,7 +43,16 @@ apiClient.interceptors.request.use(
   }
 );
 
-// Response interceptor for error handling
+/**
+ * Interceptor de respuestas HTTP que maneja el parseo manual de JSON
+ * y el manejo de errores de forma consistente.
+ *
+ * @param response - Respuesta HTTP recibida
+ * @returns Respuesta con los datos parseados como objeto JSON
+ * @throws Error si la respuesta no es un JSON válido
+ *
+ * @internal
+ */
 apiClient.interceptors.response.use(
   (response) => {
     // Parse JSON manually from text response
@@ -57,6 +87,14 @@ apiClient.interceptors.response.use(
     }
     return response;
   },
+  /**
+   * Maneja errores de la petición HTTP.
+   *
+   * @param error - Error de Axios que puede ser de diferentes tipos
+   * @returns Rechaza la promesa con un mensaje de error descriptivo
+   *
+   * @internal
+   */
   (error: AxiosError) => {
     // Handle JSON parsing errors specifically
     if (error.message && error.message.includes('JSON')) {
@@ -93,7 +131,30 @@ apiClient.interceptors.response.use(
   }
 );
 
+/**
+ * API cliente para interactuar con el servicio de recetas de DummyJSON.
+ * Proporciona métodos para obtener recetas de diferentes formas.
+ *
+ * @public
+ */
 export const recipesApi = {
+  /**
+   * Obtiene todas las recetas disponibles desde la API.
+   *
+   * @returns Una promesa que se resuelve con la respuesta de la API
+   *          que incluye un array de recetas y metadatos de paginación
+   * @throws Error si la petición falla o la respuesta es inválida
+   *
+   * @example
+   * ```typescript
+   * try {
+   *   const response = await recipesApi.getAllRecipes();
+   *   console.log(`Total de recetas: ${response.total}`);
+   * } catch (error) {
+   *   console.error('Error al obtener recetas:', error);
+   * }
+   * ```
+   */
   getAllRecipes: async (): Promise<RecipesResponse> => {
     try {
       const response = await apiClient.get<RecipesResponse>('/recipes');
@@ -117,6 +178,23 @@ export const recipesApi = {
     }
   },
 
+  /**
+   * Obtiene una receta específica por su identificador.
+   *
+   * @param id - Identificador numérico único de la receta
+   * @returns Una promesa que se resuelve con los datos de la receta
+   * @throws Error si la petición falla, la receta no existe o la respuesta es inválida
+   *
+   * @example
+   * ```typescript
+   * try {
+   *   const recipe = await recipesApi.getRecipeById(1);
+   *   console.log(`Receta: ${recipe.name}`);
+   * } catch (error) {
+   *   console.error('Error al obtener la receta:', error);
+   * }
+   * ```
+   */
   getRecipeById: async (id: number): Promise<Recipe> => {
     try {
       const response = await apiClient.get<Recipe>(`/recipes/${id}`);
@@ -140,8 +218,29 @@ export const recipesApi = {
     }
   },
 
-  // Note: DummyJSON API may not support filtering by difficulty in query params
-  // This method is kept for potential future use or API updates
+  /**
+   * Obtiene recetas filtradas por nivel de dificultad.
+   *
+   * @remarks
+   * Nota: La API de DummyJSON puede no soportar el filtrado por dificultad
+   * en los parámetros de consulta. Este método se mantiene para uso futuro
+   * o actualizaciones de la API.
+   *
+   * @param difficulty - Nivel de dificultad a filtrar ('Easy', 'Medium' o 'Hard')
+   * @returns Una promesa que se resuelve con la respuesta de la API
+   *          que incluye un array de recetas filtradas y metadatos de paginación
+   * @throws Error si la petición falla o la respuesta es inválida
+   *
+   * @example
+   * ```typescript
+   * try {
+   *   const response = await recipesApi.getRecipesByDifficulty('Easy');
+   *   console.log(`Recetas fáciles: ${response.recipes.length}`);
+   * } catch (error) {
+   *   console.error('Error al obtener recetas:', error);
+   * }
+   * ```
+   */
   getRecipesByDifficulty: async (
     difficulty: 'Easy' | 'Medium' | 'Hard'
   ): Promise<RecipesResponse> => {
