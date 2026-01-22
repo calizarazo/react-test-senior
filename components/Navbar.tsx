@@ -4,76 +4,30 @@ import React from 'react';
 import {
   AppBar,
   Toolbar,
-  Typography,
   Button,
-  InputBase,
   Box,
   IconButton,
 } from '@mui/material';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import SearchIcon from '@mui/icons-material/Search';
 import LoginIcon from '@mui/icons-material/Login';
-import { styled, alpha } from '@mui/material/styles';
-
-/**
- * Componente estilizado para el contenedor de búsqueda en la barra de navegación.
- *
- * @internal
- */
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
-    width: 'auto',
-  },
-}));
-
-/**
- * Componente estilizado para el wrapper del ícono de búsqueda.
- *
- * @internal
- */
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-/**
- * Componente estilizado para el input de búsqueda.
- *
- * @internal
- */
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  width: '100%',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-}));
+import {
+  Search,
+  SearchIconWrapper,
+  StyledInputBase,
+  toolbarSx,
+  logoBoxSx,
+  iconButtonSx,
+  actionsBoxSx,
+  loginButtonDesktopSx,
+  searchSx,
+  loginButtonMobileSx,
+  separatorBoxSx,
+} from '@/styles/navbarStyles';
 
 /**
  * Componente de barra de navegación principal de la aplicación.
- * Incluye el logo, título, barra de búsqueda y botón de inicio de sesión.
+ * Incluye el logo, barra de búsqueda y botón de inicio de sesión.
  *
  * @returns El componente de barra de navegación
  *
@@ -93,53 +47,30 @@ const Navbar: React.FC = () => {
   return (
     <>
       <AppBar position="static">
-        <Toolbar
-          sx={{
-            flexDirection: { xs: 'column', sm: 'row' },
-            alignItems: { xs: 'stretch', sm: 'center' },
-            py: { xs: 1.5, sm: 1 },
-            gap: { xs: 1.5, sm: 0 },
-            justifyContent: 'space-between',
-          }}
-        >
+        <Toolbar sx={toolbarSx}>
           {/* Logo a la izquierda */}
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              width: { xs: '100%', sm: 'auto' },
-              justifyContent: { xs: 'center', sm: 'flex-start' },
-            }}
-          >
+          <Box sx={logoBoxSx}>
             <IconButton
               size="large"
               edge="start"
               color="inherit"
               aria-label="logo"
-              sx={{ mr: 1 }}
+              sx={iconButtonSx}
             >
               <RestaurantIcon />
             </IconButton>
           </Box>
 
           {/* Iniciar Sesión y Búsqueda a la derecha */}
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 2,
-              width: { xs: '100%', sm: 'auto' },
-              justifyContent: { xs: 'center', sm: 'flex-end' },
-            }}
-          >
+          <Box sx={actionsBoxSx}>
             <Button
               color="inherit"
               startIcon={<LoginIcon />}
-              sx={{ flexShrink: 0, display: { xs: 'none', sm: 'flex' } }}
+              sx={loginButtonDesktopSx}
             >
               Iniciar Sesión
             </Button>
-            <Search sx={{ width: { xs: '100%', sm: 'auto' }, minWidth: { sm: 200 } }}>
+            <Search sx={searchSx}>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
@@ -151,7 +82,7 @@ const Navbar: React.FC = () => {
             <Button
               color="inherit"
               startIcon={<LoginIcon />}
-              sx={{ flexShrink: 0, display: { xs: 'flex', sm: 'none' } }}
+              sx={loginButtonMobileSx}
             >
               Iniciar Sesión
             </Button>
@@ -159,15 +90,7 @@ const Navbar: React.FC = () => {
         </Toolbar>
       </AppBar>
       {/* Separador ondulado */}
-      <Box
-        sx={{
-          width: '100%',
-          height: '24px',
-          position: 'relative',
-          overflow: 'hidden',
-          backgroundColor: 'background.default',
-        }}
-      >
+      <Box sx={separatorBoxSx}>
         <svg
           width="100%"
           height="24"
@@ -194,4 +117,3 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
-

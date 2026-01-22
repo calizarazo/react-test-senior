@@ -15,6 +15,14 @@ import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
 import Footer from '@/components/Footer';
 import RecipeTable from '@/components/RecipeTable';
+import {
+  pageLayoutSx,
+  contentWrapperSx,
+  menuButtonSx,
+  getMainBoxSx,
+  titleWrapperSx,
+  titleSx,
+} from '@/styles/pageStyles';
 
 /**
  * Ancho del drawer lateral en píxeles.
@@ -54,27 +62,16 @@ export default function Home() {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <Box sx={pageLayoutSx}>
       <Navbar />
-      <Box sx={{ display: 'flex', flex: 1, position: 'relative' }}>
+      <Box sx={contentWrapperSx}>
         {isMobile && (
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{
-              position: 'fixed',
-              top: 16,
-              left: 16,
-              zIndex: 0,
-              backgroundColor: 'background.paper',
-              marginLeft: 5,
-              boxShadow: 2,
-              '&:hover': {
-                backgroundColor: 'action.hover',
-              },
-            }}
+            sx={menuButtonSx}
           >
             <MenuIcon />
           </IconButton>
@@ -84,25 +81,11 @@ export default function Home() {
           onClose={handleDrawerToggle}
           drawerWidth={drawerWidth}
         />
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            p: 3,
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
-          }}
-        >
+        <Box component="main" sx={getMainBoxSx(drawerWidth)}>
           <Toolbar />
           <Container maxWidth="lg">
-            <Box sx={{ textAlign: 'center', mb: 4 }}>
-              <Typography
-                variant="h4"
-                component="h1"
-                sx={{
-                  fontWeight: 'bold',
-                  mb: 3,
-                }}
-              >
+            <Box sx={titleWrapperSx}>
+              <Typography variant="h4" component="h1" sx={titleSx}>
                 Tabla de recetas
               </Typography>
             </Box>
@@ -114,4 +97,3 @@ export default function Home() {
     </Box>
   );
 }
-

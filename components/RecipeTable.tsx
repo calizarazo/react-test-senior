@@ -17,6 +17,16 @@ import {
 } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { useRecipeStore } from '@/store/recipeStore';
+import {
+  loadingBoxSx,
+  errorAlertSx,
+  emptyBoxSx,
+  tableContainerSx,
+  tableSx,
+  tableCellHeaderSx,
+  tableRowSx,
+  getDifficultyBadgeSx,
+} from '@/styles/recipeTableStyles';
 
 /**
  * Componente que muestra una tabla paginada con todas las recetas disponibles.
@@ -81,7 +91,7 @@ const RecipeTable: React.FC = () => {
 
   if (loading) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="400px">
+      <Box sx={loadingBoxSx}>
         <CircularProgress />
       </Box>
     );
@@ -89,7 +99,7 @@ const RecipeTable: React.FC = () => {
 
   if (error) {
     return (
-      <Alert severity="error" sx={{ mb: 2 }}>
+      <Alert severity="error" sx={errorAlertSx}>
         {error}
       </Alert>
     );
@@ -97,7 +107,7 @@ const RecipeTable: React.FC = () => {
 
   if (filteredRecipes.length === 0) {
     return (
-      <Box textAlign="center" py={4}>
+      <Box sx={emptyBoxSx}>
         <Typography variant="h6" color="text.secondary">
           No se encontraron recetas
         </Typography>
@@ -110,30 +120,25 @@ const RecipeTable: React.FC = () => {
       <TableContainer
         component={Paper}
         className="table-container"
-        sx={{
-          mb: 2,
-          overflowX: 'auto',
-          width: { xs: '100%', sm: '100%', md: '100%' },
-          marginLeft: { xs: 0, sm: 'auto', md: 0 },
-        }}
+        sx={tableContainerSx}
       >
-        <Table sx={{ minWidth: 650 }} aria-label="tabla de recetas">
+        <Table sx={tableSx} aria-label="tabla de recetas">
           <TableHead>
             <TableRow>
-              <TableCell sx={{ fontWeight: 'bold' }}>Nombre</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }} align="right">
+              <TableCell sx={tableCellHeaderSx}>Nombre</TableCell>
+              <TableCell sx={tableCellHeaderSx} align="right">
                 Cocina
               </TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }} align="right">
+              <TableCell sx={tableCellHeaderSx} align="right">
                 Tiempo Preparación (min)
               </TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }} align="right">
+              <TableCell sx={tableCellHeaderSx} align="right">
                 Tiempo Cocción (min)
               </TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }} align="right">
+              <TableCell sx={tableCellHeaderSx} align="right">
                 Raciones
               </TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }} align="right">
+              <TableCell sx={tableCellHeaderSx} align="right">
                 Dificultad
               </TableCell>
             </TableRow>
@@ -144,12 +149,7 @@ const RecipeTable: React.FC = () => {
                 key={recipe.id}
                 hover
                 onClick={() => handleRowClick(recipe.id)}
-                sx={{
-                  cursor: 'pointer',
-                  '&:hover': {
-                    backgroundColor: 'action.hover',
-                  },
-                }}
+                sx={tableRowSx}
               >
                 <TableCell component="th" scope="row">
                   {recipe.name}
@@ -159,27 +159,7 @@ const RecipeTable: React.FC = () => {
                 <TableCell align="right">{recipe.cookTimeMinutes}</TableCell>
                 <TableCell align="right">{recipe.servings}</TableCell>
                 <TableCell align="right">
-                  <Box
-                    component="span"
-                    sx={{
-                      px: 1,
-                      py: 0.5,
-                      borderRadius: 1,
-                      backgroundColor:
-                        recipe.difficulty === 'Easy'
-                          ? 'success.light'
-                          : recipe.difficulty === 'Medium'
-                          ? 'warning.light'
-                          : 'error.light',
-                      color:
-                        recipe.difficulty === 'Easy'
-                          ? 'success.contrastText'
-                          : recipe.difficulty === 'Medium'
-                          ? 'warning.contrastText'
-                          : 'error.contrastText',
-                      fontWeight: 'bold',
-                    }}
-                  >
+                  <Box component="span" sx={getDifficultyBadgeSx(recipe.difficulty)}>
                     {recipe.difficulty}
                   </Box>
                 </TableCell>
@@ -202,4 +182,3 @@ const RecipeTable: React.FC = () => {
 };
 
 export default RecipeTable;
-

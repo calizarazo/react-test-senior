@@ -12,6 +12,13 @@ import {
   Divider,
 } from '@mui/material';
 import { useRecipeStore } from '@/store/recipeStore';
+import {
+  getDrawerContentSx,
+  sidebarTitleSx,
+  listItemButtonSx,
+  getTemporaryDrawerSx,
+  getPermanentDrawerSx,
+} from '@/styles/sidebarStyles';
 
 /**
  * Propiedades del componente Sidebar.
@@ -73,8 +80,8 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
   };
 
   const drawerContent = (
-    <Box sx={{ width: drawerWidth, pt: 2 }}>
-      <Typography variant="h6" sx={{ px: 2, mb: 1, fontWeight: 'bold' }}>
+    <Box sx={getDrawerContentSx(drawerWidth)}>
+      <Typography variant="h6" sx={sidebarTitleSx}>
         Filtrar por Dificultad
       </Typography>
       <Divider />
@@ -84,15 +91,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
             <ListItemButton
               selected={difficultyFilter === difficulty}
               onClick={() => handleFilterChange(difficulty)}
-              sx={{
-                '&.Mui-selected': {
-                  backgroundColor: 'primary.main',
-                  color: 'primary.contrastText',
-                  '&:hover': {
-                    backgroundColor: 'primary.dark',
-                  },
-                },
-              }}
+              sx={listItemButtonSx}
             >
               <ListItemText primary={difficulty === 'All' ? 'Todas' : difficulty} />
             </ListItemButton>
@@ -109,29 +108,15 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
         open={open}
         onClose={onClose}
         ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
+          keepMounted: true,
         }}
-        sx={{
-          display: { xs: 'block', sm: 'none' },
-          '& .MuiDrawer-paper': {
-            boxSizing: 'border-box',
-            width: drawerWidth,
-          },
-        }}
+        sx={getTemporaryDrawerSx(drawerWidth)}
       >
         {drawerContent}
       </Drawer>
       <Drawer
         variant="permanent"
-        sx={{
-          display: { xs: 'none', sm: 'block' },
-          '& .MuiDrawer-paper': {
-            boxSizing: 'border-box',
-            width: drawerWidth,
-            position: 'relative',
-            height: '100%',
-          },
-        }}
+        sx={getPermanentDrawerSx(drawerWidth)}
         open
       >
         {drawerContent}
@@ -141,4 +126,3 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
 };
 
 export default Sidebar;
-

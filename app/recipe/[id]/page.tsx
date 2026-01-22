@@ -21,6 +21,20 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useRecipeStore } from '@/store/recipeStore';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import {
+  recipeDetailPageLayoutSx,
+  recipeDetailLoadingBoxSx,
+  recipeDetailContainerSx,
+  recipeDetailErrorAlertSx,
+  recipeDetailBackButtonSx,
+  recipeDetailBackButtonMainSx,
+  recipeDetailPaperSx,
+  recipeDetailChipsWrapperSx,
+  recipeDetailRatingSectionSx,
+  recipeDetailRatingBoxSx,
+  recipeDetailDividerSx,
+  recipeDetailTagsWrapperSx,
+} from '@/styles/recipeDetailStyles';
 
 /**
  * Página de detalle de una receta específica.
@@ -64,17 +78,9 @@ export default function RecipeDetailPage() {
 
   if (loading) {
     return (
-      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Box sx={recipeDetailPageLayoutSx}>
         <Navbar />
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flex: 1,
-            minHeight: '400px',
-          }}
-        >
+        <Box sx={recipeDetailLoadingBoxSx}>
           <CircularProgress />
         </Box>
         <Footer />
@@ -84,10 +90,10 @@ export default function RecipeDetailPage() {
 
   if (error) {
     return (
-      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Box sx={recipeDetailPageLayoutSx}>
         <Navbar />
-        <Container maxWidth="lg" sx={{ py: 4, flex: 1 }}>
-          <Alert severity="error" sx={{ mb: 2 }}>
+        <Container maxWidth="lg" sx={recipeDetailContainerSx}>
+          <Alert severity="error" sx={recipeDetailErrorAlertSx}>
             {error}
           </Alert>
           <Button
@@ -105,9 +111,9 @@ export default function RecipeDetailPage() {
 
   if (!selectedRecipe) {
     return (
-      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Box sx={recipeDetailPageLayoutSx}>
         <Navbar />
-        <Container maxWidth="lg" sx={{ py: 4, flex: 1 }}>
+        <Container maxWidth="lg" sx={recipeDetailContainerSx}>
           <Typography variant="h6" color="text.secondary">
             Receta no encontrada
           </Typography>
@@ -115,7 +121,7 @@ export default function RecipeDetailPage() {
             variant="contained"
             startIcon={<ArrowBackIcon />}
             onClick={handleBack}
-            sx={{ mt: 2 }}
+            sx={recipeDetailBackButtonSx}
           >
             Volver a la lista
           </Button>
@@ -126,24 +132,24 @@ export default function RecipeDetailPage() {
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <Box sx={recipeDetailPageLayoutSx}>
       <Navbar />
-      <Container maxWidth="lg" sx={{ py: 4, flex: 1 }}>
+      <Container maxWidth="lg" sx={recipeDetailContainerSx}>
         <Button
           variant="outlined"
           startIcon={<ArrowBackIcon />}
           onClick={handleBack}
-          sx={{ mb: 3 }}
+          sx={recipeDetailBackButtonMainSx}
         >
           Volver a la lista
         </Button>
 
-        <Paper elevation={3} sx={{ p: 4 }}>
+        <Paper elevation={3} sx={recipeDetailPaperSx}>
           <Typography variant="h4" component="h1" gutterBottom>
             {selectedRecipe.name}
           </Typography>
 
-          <Box sx={{ display: 'flex', gap: 2, mb: 3, flexWrap: 'wrap' }}>
+          <Box sx={recipeDetailChipsWrapperSx}>
             <Chip label={selectedRecipe.cuisine} color="primary" />
             <Chip
               label={selectedRecipe.difficulty}
@@ -151,8 +157,8 @@ export default function RecipeDetailPage() {
                 selectedRecipe.difficulty === 'Easy'
                   ? 'success'
                   : selectedRecipe.difficulty === 'Medium'
-                  ? 'warning'
-                  : 'error'
+                    ? 'warning'
+                    : 'error'
               }
             />
             <Chip label={`${selectedRecipe.servings} raciones`} />
@@ -161,11 +167,11 @@ export default function RecipeDetailPage() {
             />
           </Box>
 
-          <Box sx={{ mb: 3 }}>
+          <Box sx={recipeDetailRatingSectionSx}>
             <Typography variant="h6" gutterBottom>
               Valoración
             </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Box sx={recipeDetailRatingBoxSx}>
               <Rating
                 value={selectedRecipe.rating}
                 precision={0.1}
@@ -178,7 +184,7 @@ export default function RecipeDetailPage() {
             </Box>
           </Box>
 
-          <Divider sx={{ my: 3 }} />
+          <Divider sx={recipeDetailDividerSx} />
 
           <Typography variant="h6" gutterBottom>
             Ingredientes
@@ -191,7 +197,7 @@ export default function RecipeDetailPage() {
             ))}
           </List>
 
-          <Divider sx={{ my: 3 }} />
+          <Divider sx={recipeDetailDividerSx} />
 
           <Typography variant="h6" gutterBottom>
             Instrucciones
@@ -209,11 +215,11 @@ export default function RecipeDetailPage() {
 
           {selectedRecipe.tags && selectedRecipe.tags.length > 0 && (
             <>
-              <Divider sx={{ my: 3 }} />
+              <Divider sx={recipeDetailDividerSx} />
               <Typography variant="h6" gutterBottom>
                 Etiquetas
               </Typography>
-              <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+              <Box sx={recipeDetailTagsWrapperSx}>
                 {selectedRecipe.tags.map((tag, index) => (
                   <Chip key={index} label={tag} variant="outlined" />
                 ))}
@@ -226,4 +232,3 @@ export default function RecipeDetailPage() {
     </Box>
   );
 }
-

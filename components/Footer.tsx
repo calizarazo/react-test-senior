@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Box, Typography, Container } from '@mui/material';
+import { footerSx } from '@/styles/footerStyles';
 
 /**
  * Componente de pie de página de la aplicación.
@@ -24,18 +25,7 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <Box
-      component="footer"
-      sx={{
-        py: 3,
-        px: 2,
-        mt: 'auto',
-        backgroundColor: (theme) =>
-          theme.palette.mode === 'light'
-            ? theme.palette.grey[200]
-            : theme.palette.grey[800],
-      }}
-    >
+    <Box component="footer" sx={footerSx}>
       <Container maxWidth="lg">
         <Typography variant="body2" color="text.secondary" align="center">
           Desarrollado por camilazo - {currentYear}
@@ -46,4 +36,3 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
-
