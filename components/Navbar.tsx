@@ -11,6 +11,7 @@ import {
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import SearchIcon from '@mui/icons-material/Search';
 import LoginIcon from '@mui/icons-material/Login';
+import MenuIcon from '@mui/icons-material/Menu';
 import {
   Search,
   SearchIconWrapper,
@@ -18,6 +19,7 @@ import {
   toolbarSx,
   logoBoxSx,
   iconButtonSx,
+  menuButtonSx,
   actionsBoxSx,
   loginButtonDesktopSx,
   searchSx,
@@ -29,6 +31,9 @@ import {
  * Componente de barra de navegación principal de la aplicación.
  * Incluye el logo, barra de búsqueda y botón de inicio de sesión.
  *
+ * @param isMobile - Indica si el dispositivo es móvil
+ * @param onMenuClick - Función que se ejecuta al hacer clic en el botón del menú
+ *
  * @returns El componente de barra de navegación
  *
  * @remarks
@@ -38,17 +43,34 @@ import {
  *
  * @example
  * ```tsx
- * <Navbar />
+ * <Navbar isMobile={true} onMenuClick={handleDrawerToggle} />
  * ```
  *
  * @public
  */
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  isMobile?: boolean;
+  onMenuClick?: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ isMobile = false, onMenuClick }) => {
   return (
     <>
       <AppBar position="static">
         <Toolbar sx={toolbarSx}>
-          {/* Logo a la izquierda */}
+          {/* Icono del menú a la izquierda (solo móvil) */}
+          {isMobile && onMenuClick && (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={onMenuClick}
+              sx={menuButtonSx}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
+          {/* Logo centrado */}
           <Box sx={logoBoxSx}>
             <IconButton
               size="large"

@@ -5,12 +5,10 @@ import {
   Box,
   Container,
   Toolbar,
-  IconButton,
   useTheme,
   useMediaQuery,
   Typography,
 } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
 import Footer from '@/components/Footer';
@@ -18,7 +16,6 @@ import RecipeTable from '@/components/RecipeTable';
 import {
   pageLayoutSx,
   contentWrapperSx,
-  menuButtonSx,
   getMainBoxSx,
   titleWrapperSx,
   titleSx,
@@ -63,27 +60,16 @@ export default function Home() {
 
   return (
     <Box sx={pageLayoutSx}>
-      <Navbar />
+      <Navbar isMobile={isMobile} onMenuClick={handleDrawerToggle} />
       <Box sx={contentWrapperSx}>
-        {isMobile && (
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={menuButtonSx}
-          >
-            <MenuIcon />
-          </IconButton>
-        )}
         <Sidebar
           open={mobileOpen}
           onClose={handleDrawerToggle}
           drawerWidth={drawerWidth}
         />
-        <Box component="main" sx={getMainBoxSx(drawerWidth)}>
+        <Box component="main" sx={getMainBoxSx(drawerWidth)} className="main-content">
           <Toolbar />
-          <Container maxWidth="lg">
+          <Container maxWidth="lg" className="container-recipes">
             <Box sx={titleWrapperSx}>
               <Typography variant="h4" component="h1" sx={titleSx}>
                 Tabla de recetas

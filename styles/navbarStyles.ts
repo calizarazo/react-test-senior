@@ -58,6 +58,7 @@ export const toolbarSx: SxProps<Theme> = {
   py: { xs: 1.5, sm: 1 },
   gap: { xs: 1.5, sm: 0 },
   justifyContent: 'space-between',
+  position: 'relative',
 };
 
 export const logoBoxSx: SxProps<Theme> = {
@@ -65,10 +66,23 @@ export const logoBoxSx: SxProps<Theme> = {
   alignItems: 'center',
   width: { xs: '100%', sm: 'auto' },
   justifyContent: { xs: 'center', sm: 'flex-start' },
+  flex: { xs: 1, sm: 0 },
 };
 
 export const iconButtonSx: SxProps<Theme> = {
   mr: 1,
+};
+
+export const menuButtonSx: SxProps<Theme> = {
+  position: 'absolute',
+  left: 8,
+  ml: '6px',
+  mt: '6px',
+  backgroundColor: 'white',
+  color: 'black',
+  '&:hover': {
+    backgroundColor: 'rgba(0, 0, 0, 0.08)',
+  },
 };
 
 export const actionsBoxSx: SxProps<Theme> = {

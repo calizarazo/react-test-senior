@@ -25,3 +25,9 @@ a {
   text-decoration: none;
 }
 
+.container-recipes {
+  @media (max-width: 600px) {
+    margin-left: 0 !important;
+  }
+}
+
