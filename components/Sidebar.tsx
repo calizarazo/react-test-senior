@@ -11,7 +11,8 @@ import {
   Box,
   Divider,
 } from '@mui/material';
-import { useRecipeStore } from '@/store/recipeStore';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { setDifficultyFilter, fetchRecipes } from '@/store/recipeStore';
 import {
   getDrawerContentSx,
   sidebarTitleSx,
@@ -61,7 +62,9 @@ interface SidebarProps {
  * @public
  */
 const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
-  const { difficultyFilter, setDifficultyFilter } = useRecipeStore();
+  const dispatch = useAppDispatch();
+  const difficultyFilter = useAppSelector((state) => state.recipes.difficultyFilter);
+  const recipes = useAppSelector((state) => state.recipes.recipes);
 
   const difficulties: Array<'All' | 'Easy' | 'Medium' | 'Hard'> = [
     'All',
@@ -76,7 +79,11 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
    * @param difficulty - Nivel de dificultad seleccionado
    */
   const handleFilterChange = (difficulty: 'All' | 'Easy' | 'Medium' | 'Hard') => {
-    setDifficultyFilter(difficulty);
+    dispatch(setDifficultyFilter(difficulty));
+    // If recipes are not loaded, fetch them
+    if (recipes.length === 0) {
+      dispatch(fetchRecipes());
+    }
   };
 
   const drawerContent = (

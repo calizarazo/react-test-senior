@@ -16,7 +16,8 @@ import {
   Typography,
 } from '@mui/material';
 import { useRouter } from 'next/navigation';
-import { useRecipeStore } from '@/store/recipeStore';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { fetchRecipes, setCurrentPage } from '@/store/recipeStore';
 import {
   loadingBoxSx,
   errorAlertSx,
@@ -50,18 +51,17 @@ import {
  */
 const RecipeTable: React.FC = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const {
     filteredRecipes,
     loading,
     error,
     currentPage,
     itemsPerPage,
-    fetchRecipes,
-    setCurrentPage,
-  } = useRecipeStore();
+  } = useAppSelector((state) => state.recipes);
 
   useEffect(() => {
-    fetchRecipes();
+    dispatch(fetchRecipes());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -72,7 +72,7 @@ const RecipeTable: React.FC = () => {
    * @param newPage - Nueva página seleccionada (basada en 0)
    */
   const handleChangePage = (_event: unknown, newPage: number) => {
-    setCurrentPage(newPage + 1); // Convert from 0-based to 1-based
+    dispatch(setCurrentPage(newPage + 1)); // Convert from 0-based to 1-based
   };
 
   /**

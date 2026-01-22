@@ -3,7 +3,9 @@
 import React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { Provider } from 'react-redux';
 import { theme } from '@/theme/theme';
+import { store } from '@/store/store';
 
 /**
  * Componente que registra y proporciona el tema de Material-UI a toda la aplicación.
@@ -28,10 +30,12 @@ import { theme } from '@/theme/theme';
  */
 export default function ThemeRegistry({ children }: { children: React.ReactNode }) {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {children}
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
+    </Provider>
   );
 }
 

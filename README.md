@@ -19,7 +19,8 @@ Una aplicación web moderna desarrollada con Next.js, React, TypeScript y Materi
 - **TypeScript**: Superset de JavaScript con tipado estático
 - **Material UI (MUI)**: Biblioteca de componentes de React
 - **Axios**: Cliente HTTP para realizar peticiones a la API
-- **Zustand**: Librería de gestión de estado ligera y simple
+- **Redux Toolkit**: Librería de gestión de estado predecible y escalable
+- **React Redux**: Bindings oficiales de React para Redux
 - **Emotion**: Librería de CSS-in-JS utilizada por Material UI
 
 ## 📋 Requisitos Previos
@@ -106,7 +107,9 @@ pruebatecnica/
 ├── services/             # Servicios de API
 │   └── api.ts           # Cliente Axios y funciones de API
 ├── store/               # Gestión de estado
-│   └── recipeStore.ts   # Store de Zustand para recetas
+│   ├── recipeStore.ts   # Slice de Redux para recetas
+│   ├── store.ts         # Configuración del store de Redux
+│   └── hooks.ts         # Hooks tipados para Redux
 ├── types/               # Definiciones de tipos TypeScript
 │   └── recipe.ts        # Tipos relacionados con recetas
 ├── theme/               # Configuración de tema
@@ -171,7 +174,7 @@ La aplicación utiliza la API pública de DummyJSON Recipes:
 ✅ Navegación entre páginas  
 ✅ Uso de Axios para peticiones HTTP  
 ✅ Manejo de errores en las peticiones  
-✅ Gestión de estado con Zustand  
+✅ Gestión de estado con Redux Toolkit  
 ✅ Diseño responsive con Material UI  
 ✅ Interfaz visualmente atractiva y fácil de navegar  
 

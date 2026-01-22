@@ -18,7 +18,8 @@ import {
   ListItemText,
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useRecipeStore } from '@/store/recipeStore';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { fetchRecipeById } from '@/store/recipeStore';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import {
@@ -60,14 +61,15 @@ import {
 export default function RecipeDetailPage() {
   const params = useParams();
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const recipeId = parseInt(params.id as string, 10);
-  const { selectedRecipe, loading, error, fetchRecipeById } = useRecipeStore();
+  const { selectedRecipe, loading, error } = useAppSelector((state) => state.recipes);
 
   useEffect(() => {
     if (recipeId) {
-      fetchRecipeById(recipeId);
+      dispatch(fetchRecipeById(recipeId));
     }
-  }, [recipeId, fetchRecipeById]);
+  }, [recipeId, dispatch]);
 
   /**
    * Maneja la navegación de vuelta a la página principal.
