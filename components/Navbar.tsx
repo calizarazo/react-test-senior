@@ -91,42 +91,105 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
  */
 const Navbar: React.FC = () => {
   return (
-    <AppBar position="static" sx={{ mb: 2 }}>
-      <Toolbar>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
+    <>
+      <AppBar position="static">
+        <Toolbar
+          sx={{
+            flexDirection: { xs: 'column', sm: 'row' },
+            alignItems: { xs: 'stretch', sm: 'center' },
+            py: { xs: 1.5, sm: 1 },
+            gap: { xs: 1.5, sm: 0 },
+            justifyContent: 'space-between',
+          }}
         >
-          <RestaurantIcon />
-        </IconButton>
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{ flexGrow: 1, fontWeight: 'bold' }}
+          {/* Logo a la izquierda */}
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              width: { xs: '100%', sm: 'auto' },
+              justifyContent: { xs: 'center', sm: 'flex-start' },
+            }}
+          >
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="logo"
+              sx={{ mr: 1 }}
+            >
+              <RestaurantIcon />
+            </IconButton>
+          </Box>
+
+          {/* Iniciar Sesión y Búsqueda a la derecha */}
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 2,
+              width: { xs: '100%', sm: 'auto' },
+              justifyContent: { xs: 'center', sm: 'flex-end' },
+            }}
+          >
+            <Button
+              color="inherit"
+              startIcon={<LoginIcon />}
+              sx={{ flexShrink: 0, display: { xs: 'none', sm: 'flex' } }}
+            >
+              Iniciar Sesión
+            </Button>
+            <Search sx={{ width: { xs: '100%', sm: 'auto' }, minWidth: { sm: 200 } }}>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Buscar..."
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </Search>
+            <Button
+              color="inherit"
+              startIcon={<LoginIcon />}
+              sx={{ flexShrink: 0, display: { xs: 'flex', sm: 'none' } }}
+            >
+              Iniciar Sesión
+            </Button>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      {/* Separador ondulado */}
+      <Box
+        sx={{
+          width: '100%',
+          height: '24px',
+          position: 'relative',
+          overflow: 'hidden',
+          backgroundColor: 'background.default',
+        }}
+      >
+        <svg
+          width="100%"
+          height="24"
+          viewBox="0 0 1200 24"
+          preserveAspectRatio="none"
+          style={{ display: 'block' }}
         >
-          Recetas del Mundo
-        </Typography>
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Buscar recetas…"
-            inputProps={{ 'aria-label': 'search' }}
+          <path
+            d="M0,12 Q150,2 300,12 T600,12 T900,12 T1200,12 L1200,24 L0,24 Z"
+            fill="currentColor"
+            opacity={0.1}
           />
-        </Search>
-        <Button
-          color="inherit"
-          startIcon={<LoginIcon />}
-          sx={{ ml: 2 }}
-        >
-          Iniciar Sesión
-        </Button>
-      </Toolbar>
-    </AppBar>
+          <path
+            d="M0,12 Q150,2 300,12 T600,12 T900,12 T1200,12"
+            stroke="currentColor"
+            strokeWidth="2"
+            fill="none"
+            opacity={0.3}
+          />
+        </svg>
+      </Box>
+    </>
   );
 };
 

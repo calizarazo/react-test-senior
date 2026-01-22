@@ -107,7 +107,16 @@ const RecipeTable: React.FC = () => {
 
   return (
     <>
-      <TableContainer component={Paper} sx={{ mb: 2 }}>
+      <TableContainer
+        component={Paper}
+        className="table-container"
+        sx={{
+          mb: 2,
+          overflowX: 'auto',
+          width: { xs: '100%', sm: '100%', md: '100%' },
+          marginLeft: { xs: 0, sm: 'auto', md: 0 },
+        }}
+      >
         <Table sx={{ minWidth: 650 }} aria-label="tabla de recetas">
           <TableHead>
             <TableRow>

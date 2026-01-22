@@ -8,6 +8,7 @@ import {
   IconButton,
   useTheme,
   useMediaQuery,
+  Typography,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Navbar from '@/components/Navbar';
@@ -66,8 +67,9 @@ export default function Home() {
               position: 'fixed',
               top: 16,
               left: 16,
-              zIndex: 1300,
+              zIndex: 0,
               backgroundColor: 'background.paper',
+              marginLeft: 5,
               boxShadow: 2,
               '&:hover': {
                 backgroundColor: 'action.hover',
@@ -92,6 +94,18 @@ export default function Home() {
         >
           <Toolbar />
           <Container maxWidth="lg">
+            <Box sx={{ textAlign: 'center', mb: 4 }}>
+              <Typography
+                variant="h4"
+                component="h1"
+                sx={{
+                  fontWeight: 'bold',
+                  mb: 3,
+                }}
+              >
+                Tabla de recetas
+              </Typography>
+            </Box>
             <RecipeTable />
           </Container>
         </Box>
