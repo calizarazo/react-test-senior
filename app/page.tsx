@@ -49,7 +49,7 @@ const drawerWidth = 240;
 export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   /**
    * Maneja la apertura/cierre del drawer en dispositivos móviles.

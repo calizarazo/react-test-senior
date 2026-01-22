@@ -14,7 +14,7 @@ export const Search = styled('div')(({ theme }) => ({
   },
   marginLeft: 0,
   width: '100%',
-  [theme.breakpoints.up('sm')]: {
+  [theme.breakpoints.up('md')]: {
     marginLeft: theme.spacing(1),
     width: 'auto',
   },
@@ -43,7 +43,7 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       width: '12ch',
       '&:focus': {
         width: '20ch',
@@ -53,10 +53,10 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export const toolbarSx: SxProps<Theme> = {
-  flexDirection: { xs: 'column', sm: 'row' },
-  alignItems: { xs: 'stretch', sm: 'center' },
-  py: { xs: 1.5, sm: 1 },
-  gap: { xs: 1.5, sm: 0 },
+  flexDirection: { xs: 'column', md: 'row' },
+  alignItems: { xs: 'stretch', md: 'center' },
+  py: { xs: 1.5, md: 1 },
+  gap: { xs: 1.5, md: 0 },
   justifyContent: 'space-between',
   position: 'relative',
 };
@@ -64,9 +64,9 @@ export const toolbarSx: SxProps<Theme> = {
 export const logoBoxSx: SxProps<Theme> = {
   display: 'flex',
   alignItems: 'center',
-  width: { xs: '100%', sm: 'auto' },
-  justifyContent: { xs: 'center', sm: 'flex-start' },
-  flex: { xs: 1, sm: 0 },
+  width: { xs: '100%', md: 'auto' },
+  justifyContent: { xs: 'center', md: 'flex-start' },
+  flex: { xs: 1, md: 0 },
 };
 
 export const iconButtonSx: SxProps<Theme> = {
@@ -89,23 +89,23 @@ export const actionsBoxSx: SxProps<Theme> = {
   display: 'flex',
   alignItems: 'center',
   gap: 2,
-  width: { xs: '100%', sm: 'auto' },
-  justifyContent: { xs: 'center', sm: 'flex-end' },
+  width: { xs: '100%', md: 'auto' },
+  justifyContent: { xs: 'center', md: 'flex-end' },
 };
 
 export const loginButtonDesktopSx: SxProps<Theme> = {
   flexShrink: 0,
-  display: { xs: 'none', sm: 'flex' },
+  display: { xs: 'none', md: 'flex' },
 };
 
 export const searchSx: SxProps<Theme> = {
-  width: { xs: '100%', sm: 'auto' },
-  minWidth: { sm: 200 },
+  width: { xs: '100%', md: 'auto' },
+  minWidth: { md: 200 },
 };
 
 export const loginButtonMobileSx: SxProps<Theme> = {
   flexShrink: 0,
-  display: { xs: 'flex', sm: 'none' },
+  display: { xs: 'flex', md: 'none' },
 };
 
 export const separatorBoxSx: SxProps<Theme> = {

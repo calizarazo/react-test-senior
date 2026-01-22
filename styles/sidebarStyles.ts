@@ -22,7 +22,7 @@ export const listItemButtonSx: SxProps<Theme> = {
 };
 
 export const getTemporaryDrawerSx = (drawerWidth: number): SxProps<Theme> => ({
-  display: { xs: 'block', sm: 'none' },
+  display: { xs: 'block', md: 'none' },
   '& .MuiDrawer-paper': {
     boxSizing: 'border-box',
     width: drawerWidth,
@@ -30,7 +30,7 @@ export const getTemporaryDrawerSx = (drawerWidth: number): SxProps<Theme> => ({
 });
 
 export const getPermanentDrawerSx = (drawerWidth: number): SxProps<Theme> => ({
-  display: { xs: 'none', sm: 'block' },
+  display: { xs: 'none', md: 'block' },
   '& .MuiDrawer-paper': {
     boxSizing: 'border-box',
     width: drawerWidth,
